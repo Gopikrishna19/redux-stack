@@ -2,31 +2,33 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Winner from './Winner';
-import Vote from './Vote';
+import Board from './Board';
 import * as actionCreators from '../action-creators';
 
-export class Voting extends React.Component {
+export class Results extends React.Component {
 
-  static displayName = 'Voting';
+  static displayName = 'Results';
 
   render() {
+
     return (
-      <div>
+      <div className="results">
         {
           this.props.winner ?
           <Winner winner={this.props.winner}/> :
-          <Vote {...this.props} />
+          <Board {...this.props} />
         }
       </div>
-    )
+    );
+
   }
 
 }
 
 export default connect(state => ({
-    hasVoted: state.hasVoted,
-    pair: state.vote && state.vote.pair,
+    pair: state.vote && state.vote.pair || [],
+    tally: state.vote && state.vote.tally || {},
     winner: state.winner
   }),
   actionCreators
-)(Voting);
+)(Results);

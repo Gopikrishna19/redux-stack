@@ -1,4 +1,7 @@
 import jsdom from 'jsdom';
+import register from 'ignore-styles';
+
+register(['.less', '.css']);
 
 global.document = jsdom.jsdom(`
   <!DOCTYPE html>
