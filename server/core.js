@@ -40,8 +40,7 @@ export function setEntries(state, entries) {
 
 export function next(state) {
 
-  const winners = getWinners(state.vote);
-  const entries = state.entries.concat(getWinners(state.vote).slice(0, 2));
+  const entries = state.entries.concat(getWinners(state.vote));
 
   if (entries.length === 1) {
 
@@ -57,8 +56,7 @@ export function next(state) {
     vote: {
       pair: entries.slice(0, 2)
     },
-    entries: entries.slice(2),
-    winners: winners
+    entries: entries.slice(2)
   };
 
 }
