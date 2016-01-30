@@ -1,3 +1,7 @@
+function getVotes(votes = 0) {
+  return votes;
+}
+
 function getWinners(vote) {
 
   if (!vote) {
@@ -6,9 +10,12 @@ function getWinners(vote) {
 
   const [a, b] = vote.pair;
 
-  if (vote.tally[a] > vote.tally[b]) {
+  const aVotes = getVotes(vote.tally[a]);
+  const bVotes = getVotes(vote.tally[b]);
+
+  if (aVotes > bVotes) {
     return a;
-  } else if (vote.tally[b] > vote.tally[a]) {
+  } else if (bVotes > aVotes) {
     return b;
   }
 
@@ -33,7 +40,8 @@ export function setEntries(state, entries) {
 
 export function next(state) {
 
-  const entries = state.entries.concat(getWinners(state.vote));
+  const winners = getWinners(state.vote);
+  const entries = state.entries.concat(getWinners(state.vote).slice(0, 2));
 
   if (entries.length === 1) {
 
@@ -49,7 +57,8 @@ export function next(state) {
     vote: {
       pair: entries.slice(0, 2)
     },
-    entries: entries.slice(2)
+    entries: entries.slice(2),
+    winners: winners
   };
 
 }
