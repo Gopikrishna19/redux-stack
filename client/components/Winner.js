@@ -7,9 +7,9 @@ export default class extends React.Component {
   render() {
 
     return (
-      <div className="winner">
+      <h1 className="winner">
         Winner is {this.props.winner}!
-      </div>
+      </h1>
     );
 
   }
